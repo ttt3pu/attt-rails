@@ -6,10 +6,16 @@
 
 http://localhost:3000
 
-## Reset Command
+## Setup
 
-`docker-compose run web rails db:migrate:reset`
-`docker-compose run web rails db:seed`
+```shell
+# Install gem
+docker-compose run web bundle install
+# Reset DB
+docker-compose run web rails db:migrate:reset
+# Insert data to DB
+docker-compose run web rails db:seed
+```
 
 ## Add new gem
 
