@@ -2,30 +2,36 @@
 
 ## Launch Command
 
-`docker-compose up`
+`make up`
 
 http://localhost:3000
 
 ## Setup
 
 ```shell
+make build
 # Install gem
-docker-compose run web bundle install
-# Reset DB
-docker-compose run web rails db:migrate:reset
-# Insert data to DB
-docker-compose run web rails db:seed
+make bundle
+# Reset DB and insert seed
+make reset
 ```
+
+*If windows, install something tool so that you can use the make command.
+
+ex)
+
+- Make for Windows: http://gnuwin32.sourceforge.net/packages/make.htm
+- scoop: `scoop install make`
 
 ## Add new gem
 
 ```shell
 # (1) 使用しているコンテナがあれば停止します。
-docker-compose down
+make down
 # (2) gemをGemfileに追加し、インストールします。(新たに追加されたgemの更新のみ実行されます。)
-docker-compose run web bundle install
+make bundle
 # (3) 再びコンテナを立ち上げます。
-docker-compose up
+make up
 ```
 
 ## Scrap
