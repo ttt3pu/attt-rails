@@ -13,3 +13,5 @@ rspec:
 	docker-compose exec -it web bundle exec rails rspec
 console:
 	docker-compose exec -it web bundle exec rails console
+rubocop:
+	docker-compose exec -it web bundle exec rubocop
