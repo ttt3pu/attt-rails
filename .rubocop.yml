@@ -15,6 +15,7 @@ AllCops:
     - '**/Gemfile'
     - 'vendor/**/*'
     - '.git/**/*'
+    - 'db/schema.rb'
   NewCops: enable
 
 Gemspec/DateAssignment: # new in 1.10
@@ -121,6 +122,8 @@ Style/StringChars: # new in 1.12
   Enabled: true
 Style/SwapValues: # new in 1.1
   Enabled: true
+Style/TrailingCommaInHashLiteral:
+  EnforcedStyleForMultiline: consistent_comma
 Performance/AncestorsInclude: # new in 1.7
   Enabled: true
 Performance/BigDecimalWithNumericArgument: # new in 1.7
