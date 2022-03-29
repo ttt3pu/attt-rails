@@ -10,8 +10,8 @@ reset:
 	docker-compose exec -it web rails db:migrate:reset
 	docker-compose exec -it web rails db:seed
 rspec:
-	docker-compose exec -it web bundle exec rails rspec
+	docker-compose exec -it web bundle exec rails rspec ${ARG}
 console:
-	docker-compose exec -it web bundle exec rails console
+	docker-compose exec -it web bundle exec rails console ${ARG}
 rubocop:
-	docker-compose exec -it web bundle exec rubocop
+	docker-compose exec -it web bundle exec rubocop ${ARG}
