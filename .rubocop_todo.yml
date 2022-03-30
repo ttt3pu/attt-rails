@@ -22,18 +22,6 @@ Metrics/PerceivedComplexity:
   Max: 9
 
 # Offense count: 5
-# This cop supports safe auto-correction (--auto-correct).
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: nested, compact
-Style/ClassAndModuleChildren:
-  Exclude:
-    - 'app/controllers/api/v1/blog/articles_controller.rb'
-    - 'app/helpers/api/v1/blog/articles_helper.rb'
-    - 'test/channels/application_cable/connection_test.rb'
-    - 'test/controllers/blog/articles_controller_test.rb'
-    - 'test/test_helper.rb'
-
-# Offense count: 5
 # Configuration parameters: AllowedConstants.
 Style/Documentation:
   Exclude:
@@ -51,13 +39,6 @@ Style/Documentation:
 # SupportedStyles: always, always_true, never
 Style/FrozenStringLiteralComment:
   Enabled: false
-
-# Offense count: 2
-# This cop supports unsafe auto-correction (--auto-correct-all).
-# Configuration parameters: SafeForConstants.
-Style/RedundantFetchBlock:
-  Exclude:
-    - 'config/puma.rb'
 
 # Offense count: 1
 # This cop supports safe auto-correction (--auto-correct).
@@ -80,14 +61,6 @@ Style/StringLiterals:
 Style/SymbolArray:
   EnforcedStyle: percent
   MinSize: 10
-
-# Offense count: 2
-# This cop supports safe auto-correction (--auto-correct).
-# Configuration parameters: EnforcedStyleForMultiline.
-# SupportedStylesForMultiline: comma, consistent_comma, no_comma
-Style/TrailingCommaInArguments:
-  Exclude:
-    - 'db/seeds.rb'
 
 # Offense count: 4
 # This cop supports safe auto-correction (--auto-correct).

@@ -76,6 +76,8 @@ Security/IoMethods: # new in 1.22
   Enabled: true
 Style/ArgumentsForwarding: # new in 1.1
   Enabled: true
+Style/ClassAndModuleChildren:
+  EnforcedStyle: compact
 Style/CollectionCompact: # new in 1.2
   Enabled: true
 Style/DocumentDynamicEvalDefinition: # new in 1.1
@@ -123,6 +125,8 @@ Style/StringChars: # new in 1.12
 Style/SwapValues: # new in 1.1
   Enabled: true
 Style/TrailingCommaInHashLiteral:
+  EnforcedStyleForMultiline: consistent_comma
+Style/TrailingCommaInArguments:
   EnforcedStyleForMultiline: consistent_comma
 Performance/AncestorsInclude: # new in 1.7
   Enabled: true
