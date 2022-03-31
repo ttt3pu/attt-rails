@@ -70,6 +70,12 @@ Lint/UnmodifiedReduceAccumulator: # new in 1.1
   Enabled: true
 Lint/UselessRuby2Keywords: # new in 1.23
   Enabled: true
+Metrics/CyclomaticComplexity:
+  Enabled: false
+Metrics/MethodLength:
+  Enabled: false
+Metrics/PerceivedComplexity:
+  Enabled: false
 Naming/BlockForwarding: # new in 1.24
   Enabled: true
 Security/IoMethods: # new in 1.22
@@ -80,6 +86,8 @@ Style/ClassAndModuleChildren:
   EnforcedStyle: compact
 Style/CollectionCompact: # new in 1.2
   Enabled: true
+Style/Documentation:
+  Enabled: false
 Style/DocumentDynamicEvalDefinition: # new in 1.1
   Enabled: true
 Style/EndlessMethod: # new in 1.8

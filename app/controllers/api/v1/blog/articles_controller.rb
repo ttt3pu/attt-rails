@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Api::V1::Blog::ArticlesController < ApplicationController
   def index
     articles = BlogArticle.all
