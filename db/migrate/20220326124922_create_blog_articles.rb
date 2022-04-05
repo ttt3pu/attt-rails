@@ -4,9 +4,7 @@ class CreateBlogArticles < ActiveRecord::Migration[7.0]
       t.string :slug
       t.string :title
       t.text :content
-      t.datetime :createdAt
-      t.datetime :updatedAt
-      t.datetime :publishedAt
+      t.datetime :published_at
 
       t.timestamps
     end
