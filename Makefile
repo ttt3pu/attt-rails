@@ -15,3 +15,5 @@ console:
 	docker-compose exec -it web bundle exec rails console ${ARG}
 rubocop:
 	docker-compose exec -it web bundle exec rubocop ${ARG}
+rails:
+	docker-compose exec -it web bundle exec rails ${ARG}
