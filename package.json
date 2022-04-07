@@ -1,0 +1,32 @@
+{
+  "name": "attt-rails",
+  "version": "1.0.0",
+  "description": "## Launch Command",
+  "main": "index.js",
+  "directories": {
+    "doc": "doc",
+    "lib": "lib",
+    "test": "test"
+  },
+  "engines": {
+    "node": "16.14.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ttt3pu/attt-rails.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ttt3pu/attt-rails/issues"
+  },
+  "homepage": "https://github.com/ttt3pu/attt-rails#readme",
+  "scripts": {
+    "openapi-validate": "openapi-generator-cli validate -i ./openapi/dist/openapi.yml",
+    "openapi-generate": "openapi-generator-cli generate -g typescript-axios -i ./openapi/dist/openapi.yml -o ./openapi-types"
+  },
+  "devDependencies": {
+    "@openapitools/openapi-generator-cli": "^2.4.26"
+  }
+}
