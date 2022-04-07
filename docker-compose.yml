@@ -26,20 +26,20 @@ services:
   swagger-merger:
     build:
       context: .
-      dockerfile: ./swagger/swagger-merger/Dockerfile
+      dockerfile: ./openapi/swagger-merger/Dockerfile
     command: >
-      watch 'swagger-merger -i ./swagger/src/index.yml -o ./swagger/dist/swagger.yml' /swagger/src/
+      watch 'swagger-merger -i ./openapi/src/index.yml -o ./openapi/dist/openapi.yml' /openapi/src/
     volumes:
-      - ./swagger:/swagger
+      - ./openapi:/openapi
 
   redoc:
     image: redocly/redoc
     ports:
       - 8081:80
     volumes:
-      - ./swagger/dist:/usr/share/nginx/html/swagger
+      - ./openapi/dist:/usr/share/nginx/html/openapi
     environment:
-      SPEC_URL: swagger/swagger.yml
+      SPEC_URL: openapi/openapi.yml
 
 volumes:
   bundle_path:
