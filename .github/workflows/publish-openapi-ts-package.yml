@@ -2,10 +2,8 @@ name: Publish OpenAPI TypeScript Package
 
 on:
   push:
-    branches:
-      - 'feature/setup-openapi'
-    # paths:
-    #   - 'openapi/src/**'
+    paths:
+      - 'openapi/src/**'
 
 jobs:
   publish:
