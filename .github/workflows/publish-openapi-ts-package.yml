@@ -2,9 +2,10 @@ name: Publish OpenAPI TypeScript Package
 
 on:
   push:
-    paths:
-      # - 'openapi/src/**'
-      - 'package.json'
+    branches:
+      - 'feature/setup-openapi'
+    # paths:
+    #   - 'openapi/src/**'
 
 jobs:
   publish:
@@ -13,18 +14,15 @@ jobs:
       matrix:
         node-version: [16.14.0]
     env:
-      NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-      NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-      MICROCMS_API_KEY: ${{ secrets.MICROCMS_API_KEY }}
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      PR_NUMBER: ${{ github.event.number }}
+      GITHUB_SHA: ${{ github.sha }}
 
     steps:
       - uses: actions/checkout@v2
+
       - uses: pnpm/action-setup@v2.0.1
         with:
           version: 6.20.3
-
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v2
         with:
@@ -44,22 +42,30 @@ jobs:
         run: pnpm openapi-generate
 
       - name: Set npm config
-        run: npm config set //npm.pkg.github.com/:_authToken=$GITHUB_TOKEN
+        run: |
+          npm config set //npm.pkg.github.com/:_authToken=$GITHUB_TOKEN
+          npm config set registry=https://npm.pkg.github.com
 
-      # - name: Get current version
-      #   run: |
-      #     CURRENT_VERSION=$(npm view @attt/attt-rails version)
-      #     npm version $CURRENT_VERSION
+      - name: Get latest version
+        run: LATEST_VERSION=$(npm view @ttt3pu/attt-rails version)
 
-      # - name: Update version on PR
-      #   if: github.ref != 'refs/heads/master'
-      #   run: |
-      #     npm version minor
-      #     npm version prerelease --preid=$PR_NUMBER-$GITHUB_SHA
+      - name: Temporarily set version to latest
+        run: npm version $LATEST_VERSION
 
-      #   if: github.ref == 'refs/heads/master'
-      # - name: Update version on main branch
-      #   run: npm version minor
+      - name: Set git config author info
+        run: |
+          git config user.name "GitHub Actions Bot"
+          git config user.email "<>"
+
+      - name: Update version on PR
+        if: github.ref != 'refs/heads/master'
+        run: |
+          npm version minor
+          npm version prerelease --preid=$GITHUB_SHA
+
+      - name: Update version on main branch
+        if: github.ref == 'refs/heads/master'
+        run: npm version minor
 
       - name: Publish
         run: npm publish
