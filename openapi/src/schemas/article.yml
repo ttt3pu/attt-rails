@@ -1,0 +1,36 @@
+type: object
+required:
+  - slug
+  - title
+  - content
+  - createdAt
+  - updatedAt
+  - publishedAt
+properties:
+  slug:
+    type: "string"
+    example: "hoge"
+    description: "URLに使用される文字列"
+  title:
+    type: "string"
+    example: "ほげ"
+    description: "記事タイトル"
+  content:
+    type: "string"
+    example: "# hoge\\nhuga"
+    description: "記事の内容（markdown記法）"
+  createdAt:
+    type: "string"
+    format: "date-time"
+    example: "2021-05-04T04:30:44.335Z"
+    description: "記事作成日時"
+  updatedAt:
+    type: "string"
+    format: "date-time"
+    example: "2021-05-04T04:30:44.335Z"
+    description: "記事最終更新日時"
+  publishedAt:
+    type: "string"
+    format: "date-time"
+    example: "2021-05-04T04:30:44.335Z"
+    description: "記事公開日時"
