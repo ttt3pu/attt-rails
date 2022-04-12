@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
 class Api::V1::Blog::ArticlesController < ApplicationController
-
-
   def index
-    render json: BlogArticle.all, status: :ok
+    articles = BlogArticle.all
+    render json: articles, status: :ok, each_serializer: BlogArticleSerializer
   end
 
   def show
-    render json: BlogArticle.find_by(slug: params[:slug]), status: :ok
+    article = BlogArticle.find_by(slug: params[:slug])
+    render json: article, status: :ok, serializer: BlogArticleSerializer
   end
 end
