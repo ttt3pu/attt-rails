@@ -29,3 +29,12 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+
+# Merged swagger file
+/openapi/dist/openapi.yml
+
+# node_modules
+node_modules
+
+# openapi-generator dist files
+openapi-types

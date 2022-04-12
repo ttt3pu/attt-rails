@@ -1,5 +1,7 @@
 # attt-rails
 
+Backend for https://attt.hachiware.cat/
+
 ## Launch Command
 
 `make up`
@@ -26,6 +28,24 @@ ex)
 ## Other commands (rspec, etc...)
 
 See [Makefile](./Makefile)
+
+## OpenAPI TypeScript packages
+
+When pushed with edit `openapi/src/**` files, Github packages will publish uses CI.
+
+https://github.com/ttt3pu/attt-rails/packages/1355068
+
+### To use in another repository
+
+Add config to `.npmrc`
+
+```yml
+@ttt3pu:registry=https://npm.pkg.github.com
+```
+
+Install with this command.
+
+`npm i -D @ttt3pu/attt-rails`
 
 ## Scrap
 

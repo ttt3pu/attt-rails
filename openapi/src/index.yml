@@ -1,0 +1,12 @@
+openapi: 3.0.3
+info:
+  title: "attt API"
+  version: "1.0.0"
+paths:
+  /blog/articles:
+    $ref: './paths/blog/articles.yml'
+components:
+  schemas:
+    Article:
+      $ref: './schemas/article.yml'
+

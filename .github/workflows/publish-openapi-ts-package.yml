@@ -1,0 +1,69 @@
+name: Publish OpenAPI TypeScript Package
+
+on:
+  push:
+    paths:
+      - 'openapi/src/**'
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16.14.0]
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      GITHUB_SHA: ${{ github.sha }}
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: pnpm/action-setup@v2.0.1
+        with:
+          version: 6.20.3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Merge
+        run: pnpm openapi-merge
+
+      - name: Validate
+        run: pnpm openapi-validate
+
+      - name: Generate types
+        run: pnpm openapi-generate
+
+      - name: Set npm config
+        run: |
+          npm config set //npm.pkg.github.com/:_authToken=$GITHUB_TOKEN
+          npm config set registry=https://npm.pkg.github.com
+
+      - name: Get latest version
+        run: LATEST_VERSION=$(npm view @ttt3pu/attt-rails version)
+
+      - name: Temporarily set version to latest
+        run: npm version $LATEST_VERSION
+
+      - name: Set git config author info
+        run: |
+          git config user.name "GitHub Actions Bot"
+          git config user.email "<>"
+
+      - name: Update version on PR
+        if: github.ref != 'refs/heads/master'
+        run: |
+          npm version minor
+          npm version prerelease --preid=$GITHUB_SHA
+
+      - name: Update version on main branch
+        if: github.ref == 'refs/heads/master'
+        run: npm version minor
+
+      - name: Publish
+        run: npm publish

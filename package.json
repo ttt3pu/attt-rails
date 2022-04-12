@@ -1,0 +1,35 @@
+{
+  "name": "@ttt3pu/attt-rails",
+  "version": "0.0.1",
+  "description": "",
+  "main": "openapi-types/index.ts",
+  "files": [
+    "openapi-types"
+  ],
+  "engines": {
+    "node": "16.14.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ttt3pu/attt-rails.git"
+  },
+  "keywords": [],
+  "author": "attt <ttt3pu@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ttt3pu/attt-rails/issues"
+  },
+  "homepage": "https://github.com/ttt3pu/attt-rails#readme",
+  "publishConfig": {
+    "registry":"https://npm.pkg.github.com/"
+  },
+  "scripts": {
+    "openapi-merge": "swagger-merger -i ./openapi/src/index.yml -o ./openapi/dist/openapi.yml",
+    "openapi-validate": "openapi-generator-cli validate -i ./openapi/dist/openapi.yml",
+    "openapi-generate": "openapi-generator-cli generate -g typescript-axios -i ./openapi/dist/openapi.yml -o ./openapi-types"
+  },
+  "devDependencies": {
+    "@openapitools/openapi-generator-cli": "^2.4.26",
+    "swagger-merger": "^1.5.4"
+  }
+}

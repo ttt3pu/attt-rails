@@ -15,13 +15,31 @@ services:
     command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
     volumes:
       - .:/myapp
-      - bundle_path:/bundle # 追加箇所
+      - bundle_path:/bundle
     environment:
-      - BUNDLE_PATH=/bundle # 追加箇所
+      - BUNDLE_PATH=/bundle
     ports:
       - "3000:3000"
     depends_on:
       - db
 
+  swagger-merger:
+    build:
+      context: .
+      dockerfile: ./openapi/swagger-merger/Dockerfile
+    command: >
+      watch 'swagger-merger -i ./openapi/src/index.yml -o ./openapi/dist/openapi.yml' /openapi/src/
+    volumes:
+      - ./openapi:/openapi
+
+  redoc:
+    image: redocly/redoc
+    ports:
+      - 8081:80
+    volumes:
+      - ./openapi/dist:/usr/share/nginx/html/openapi
+    environment:
+      SPEC_URL: openapi/openapi.yml
+
 volumes:
-  bundle_path: # 追加箇所
+  bundle_path:
