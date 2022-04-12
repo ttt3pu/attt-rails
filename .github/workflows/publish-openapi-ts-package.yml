@@ -56,13 +56,13 @@ jobs:
           git config user.email "<>"
 
       - name: Update version on PR
-        if: github.ref != 'refs/heads/master'
+        if: github.ref != 'refs/heads/main'
         run: |
           npm version minor
           npm version prerelease --preid=$GITHUB_SHA
 
       - name: Update version on main branch
-        if: github.ref == 'refs/heads/master'
+        if: github.ref == 'refs/heads/main'
         run: npm version minor
 
       - name: Publish
