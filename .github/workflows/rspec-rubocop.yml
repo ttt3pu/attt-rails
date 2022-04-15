@@ -1,0 +1,77 @@
+name: RSpec and RuboCop
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [opened, synchronize]
+
+env:
+  RUBY_VERSION: 3.1.1
+
+jobs:
+  run_rspec_rubocop:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16.14.0]
+    services:
+      mysql:
+        image: mysql:5.7
+        env:
+          MYSQL_ROOT_PASSWORD: password
+          MYSQL_DATABASE: root
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
+        ports:
+          - 3306:3306
+        options: --health-cmd "mysqladmin ping" --health-interval 10s --health-timeout 5s --health-retries 10
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: pnpm/action-setup@v2.0.1
+        with:
+          version: 6.20.3
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Merge
+        run: pnpm openapi-merge
+
+      - name: Validate
+        run: pnpm openapi-validate
+
+      - uses: actions/cache@v1
+        with:
+          path: vendor/bundle
+          key: bundle-${{ hashFiles('**/Gemfile.lock') }}
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ env.RUBY_VERSION }}
+          bundler-cache: true
+
+      - name: Install gem
+        run: |
+          gem install bundler
+          bundle install
+
+      - name: set database.yml
+        run: cp -v config/database.ci.yml config/database.yml
+
+      - name: db create
+        run: bundle exec rails db:create db:schema:load --trace
+
+      - name: Rspec
+        run: bundle exec rspec
+
+      - name: RuboCop
+        run: bundle exec rubocop
