@@ -1,5 +1,5 @@
 get:
-  operationId: getBlogArticles
+  operationId: getBlogArticlesSlug
   summary: "記事の取得"
   parameters:
     - in: path
