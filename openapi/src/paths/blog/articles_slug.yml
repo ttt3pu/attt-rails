@@ -1,0 +1,16 @@
+get:
+  operationId: getBlogArticles
+  summary: "記事の取得"
+  parameters:
+    - in: path
+      name: slug
+      required: true
+      schema:
+        type: string
+  responses:
+    200:
+      description: "成功"
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Article'
