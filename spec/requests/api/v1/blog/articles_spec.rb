@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.describe 'Api::V1::Blog::Articles', type: :request do
   describe 'GET #index' do
     before do
-      blog_articles = create_list(:blog_article, 10)
+      create_list(:blog_article, 10)
       get '/api/v1/blog/articles'
     end
 
