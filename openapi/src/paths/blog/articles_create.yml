@@ -1,0 +1,35 @@
+post:
+  operationId: postBlogArticlesCreate
+  summary: "記事の作成"
+  parameters:
+    - in: query
+      name: "isPublished"
+      required: true
+      schema:
+        type: boolean
+      example: true
+      description: "公開状態かどうか"
+    - in: query
+      name: "slug"
+      required: true
+      schema:
+        type: string
+      example: "hoge"
+      description: "URLに使用される文字列"
+    - in: query
+      name: "title"
+      required: true
+      schema:
+        type: string
+      example: "ほげ"
+      description: "記事タイトル"
+    - in: query
+      name: "content"
+      required: true
+      schema:
+        type: string
+      example: "# hoge\\nhuga"
+      description: "記事の内容（markdown記法）"
+  responses:
+    204:
+      description: "成功"
