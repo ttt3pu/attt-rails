@@ -16,7 +16,7 @@ class Api::V1::Blog::ArticlesController < ApplicationController
       slug: create_params[:slug],
       title: create_params[:title],
       content: create_params[:content],
-      published_at: create_params[:isPublished] ? Time.current : null,
+      published_at: create_params[:isPublished] == 'true' ? Time.current : nil,
     )
 
     post.save!
