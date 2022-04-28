@@ -26,24 +26,24 @@ RSpec.describe 'Api::V1::Blog::Articles', type: :request do
   end
 
   describe 'POST #create' do
-    def createParams(overrides = {})
-      @slug = Faker::Internet.slug
-      @title = Faker::Lorem.word
-      @content = Faker::Markdown.random
+    let(:slug) { Faker::Internet.slug }
+    let(:title) { Faker::Lorem.word }
+    let(:content) { Faker::Markdown.random }
 
-      return {
+    def create_params(overrides = {})
+      {
         isPublished: true,
-        slug: @slug,
-        title: @title,
-        content: @content,
+        slug:,
+        title:,
+        content:,
       }.merge(overrides)
     end
 
     describe '公開ステータスの時' do
-      startTime = Time.current
+      start_time = Time.current
 
       before do
-        post "/api/v1/blog/articles/create", params: createParams
+        post '/api/v1/blog/articles/create', params: create_params
       end
 
       it '返却形式とリクエスト形式が正しいこと' do
@@ -51,22 +51,18 @@ RSpec.describe 'Api::V1::Blog::Articles', type: :request do
         assert_response_schema_confirm(204)
       end
 
-      it 'リクエストした内容でBlogArticleがつくられていること' do
-        blogArticle = BlogArticle.find_by!(slug: @slug)
-        expect(blogArticle.slug).to eq @slug
-        expect(blogArticle.title).to eq @title
-        expect(blogArticle.content).to eq @content
-        expect(blogArticle.published_at).to be_between(startTime, Time.current)
+      it 'リクエストした内容でBlogArticleが作られていること' do
+        blog_article = BlogArticle.find_by!(slug:)
+        expect(blog_article.slug).to eq slug
+        expect(blog_article.title).to eq title
+        expect(blog_article.content).to eq content
+        expect(blog_article.published_at).to be_between(start_time, Time.current)
       end
     end
 
     describe '非公開ステータスの時' do
-      slug = Faker::Internet.slug
-      title = Faker::Lorem.word
-      content = Faker::Markdown.random
-
       before do
-        post "/api/v1/blog/articles/create", params: createParams(isPublished: false)
+        post '/api/v1/blog/articles/create', params: create_params(isPublished: false)
       end
 
       it '返却形式とリクエスト形式が正しいこと' do
@@ -74,12 +70,12 @@ RSpec.describe 'Api::V1::Blog::Articles', type: :request do
         assert_response_schema_confirm(204)
       end
 
-      it 'リクエストした内容でBlogArticleがつくられていること' do
-        blogArticle = BlogArticle.find_by!(slug: @slug)
-        expect(blogArticle.slug).to eq @slug
-        expect(blogArticle.title).to eq @title
-        expect(blogArticle.content).to eq @content
-        expect(blogArticle.published_at).to eq nil
+      it 'リクエストした内容でBlogArticleが作られていること' do
+        blog_article = BlogArticle.find_by!(slug:)
+        expect(blog_article.slug).to eq slug
+        expect(blog_article.title).to eq title
+        expect(blog_article.content).to eq content
+        expect(blog_article.published_at).to be_nil
       end
     end
   end

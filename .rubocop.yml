@@ -72,6 +72,9 @@ Lint/UnmodifiedReduceAccumulator: # new in 1.1
   Enabled: true
 Lint/UselessRuby2Keywords: # new in 1.23
   Enabled: true
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'
 Metrics/CyclomaticComplexity:
   Enabled: false
 Metrics/MethodLength:
@@ -268,3 +271,5 @@ RSpec/FactoryBot/SyntaxMethods: # new in 2.7
   Enabled: true
 RSpec/Rails/AvoidSetupHook: # new in 2.4
   Enabled: true
+RSpec/MultipleExpectations:
+  Enabled: false
