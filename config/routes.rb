@@ -4,6 +4,7 @@ Rails.application.routes.draw do
       namespace :blog do
         get 'articles' => 'articles#index'
         get 'articles/:slug' => 'articles#show'
+        post 'articles/create' => 'articles#create'
       end
     end
   end

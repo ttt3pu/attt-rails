@@ -5,7 +5,7 @@ up:
 down:
 	docker-compose down
 bundle:
-	docker-compose exec web bundle install
+	docker-compose run web bundle install
 reset:
 	docker-compose exec web rails db:migrate:reset
 	docker-compose exec web rails db:seed

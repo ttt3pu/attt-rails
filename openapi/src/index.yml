@@ -5,6 +5,10 @@ info:
 paths:
   /blog/articles:
     $ref: './paths/blog/articles.yml'
+  /blog/articles/{slug}:
+    $ref: './paths/blog/articles_slug.yml'
+  /blog/articles/create:
+    $ref: './paths/blog/articles_create.yml'
 components:
   schemas:
     Article:
