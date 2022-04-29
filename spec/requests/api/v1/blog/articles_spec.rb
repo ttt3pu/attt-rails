@@ -26,6 +26,8 @@ RSpec.describe 'Api::V1::Blog::Articles', type: :request do
   end
 
   describe 'POST #create' do
+    let(:xss_example) { '<script>alert("hoge")</script>' }
+    let(:xss_example_sanitized) { 'alert("hoge")' }
     let(:slug) { Faker::Internet.slug }
     let(:title) { Faker::Lorem.word }
     let(:content) { Faker::Markdown.random }
@@ -35,7 +37,7 @@ RSpec.describe 'Api::V1::Blog::Articles', type: :request do
         isPublished: true,
         slug:,
         title:,
-        content:,
+        content: content + xss_example,
       }.merge(overrides)
     end
 
@@ -55,7 +57,7 @@ RSpec.describe 'Api::V1::Blog::Articles', type: :request do
         blog_article = BlogArticle.find_by!(slug:)
         expect(blog_article.slug).to eq slug
         expect(blog_article.title).to eq title
-        expect(blog_article.content).to eq content
+        expect(blog_article.content).to eq content + xss_example_sanitized
         expect(blog_article.published_at).to be_between(start_time, Time.current)
       end
     end
@@ -74,7 +76,7 @@ RSpec.describe 'Api::V1::Blog::Articles', type: :request do
         blog_article = BlogArticle.find_by!(slug:)
         expect(blog_article.slug).to eq slug
         expect(blog_article.title).to eq title
-        expect(blog_article.content).to eq content
+        expect(blog_article.content).to eq content + xss_example_sanitized
         expect(blog_article.published_at).to be_nil
       end
     end

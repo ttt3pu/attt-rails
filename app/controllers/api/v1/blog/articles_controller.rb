@@ -15,7 +15,7 @@ class Api::V1::Blog::ArticlesController < ApplicationController
     post = BlogArticle.new(
       slug: create_params[:slug],
       title: create_params[:title],
-      content: create_params[:content],
+      content: ApplicationController.helpers.sanitize(create_params[:content]),
       published_at: create_params[:isPublished] == 'true' ? Time.current : nil,
     )
 
