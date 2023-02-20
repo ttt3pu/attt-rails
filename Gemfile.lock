@@ -89,7 +89,6 @@ GEM
       xpath (~> 3.2)
     case_transform (0.2)
       activesupport
-    childprocess (4.1.0)
     committee (4.4.0)
       json_schema (~> 0.14, >= 0.14.3)
       openapi_parser (>= 0.11.1, < 1.0)
@@ -240,8 +239,7 @@ GEM
       rubocop (~> 1.19)
     ruby-progressbar (1.11.0)
     rubyzip (2.3.2)
-    selenium-webdriver (4.2.1)
-      childprocess (>= 0.5, < 5.0)
+    selenium-webdriver (4.8.1)
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
